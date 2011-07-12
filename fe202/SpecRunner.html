@@ -7,196 +7,23 @@
   <script type="text/javascript" src="lib/jasmine-1.0.2/jasmine.js"></script>
   <script type="text/javascript" src="lib/jasmine-1.0.2/jasmine-html.js"></script>
 
+  <!-- include utility files here -->
+  <script type="text/javascript" src="util/string.js"></script>
+
+  <!-- include source files here... -->
+  <script type="text/javascript" src="src/Validation.js"></script>
+
+  <!-- include spec files here... -->
+  <script type="text/javascript" src="spec/ValidationSpec.js"></script>
+
 </head>
 <body>
-    <script type="text/javascript">
-        /*Validation Class to validate e-mails, name&surname and zip code formats
-            Kamer Guzel
-         */
 
-	
-		var Validation = function() {
-		
-		};
-
-        var isAlphaChar = function (string){
-           return /[A-Za-z]+\s+[A-Za-z]/.test(string);
-           /*
-           * tried to code this myself instead of using regular expressions,
-           * but don't know how to store and handle Turkish chars in an array
-           * at the first place
-           * /
-           /*var turkishAlphabet = [a, b, c, ç, d,e,f,g,ğ,h,ı,i,j,k,l,m,n,o,ö,p,r,s,ş,t,u,ü,v,y,z];
-            for (var i = 0; i < string.length, i++){
-                    for (var j = 0; j < turkishAlphabet.length, j++){
-                        if (string.charAt(i) == turkishAlphabet[j]){
-                           return true;
-                        }
-                        else{
-                            return false;
-                        }
-                    }
-                }*/
-        };
-
-        var isNumericChar = function (string){
-          //  return /[0-9]/.test(string);
-            return /(\d{5}$)/.test(string);
-        };
-
-        /*
-           * tried to code isNumericChar myself instead of using regular expressions,
-           * have not succeeded yet
-           * /
-        /*  var numArray = [0,1,2,3,4,5,6,7,8,9];
-        var isNumericChar = function (string){
-
-            for (var i = 0; i < string.length; i++){
-                    for (var j = 0; j < numArray.length; j++){
-                        if (string.charAt(i) === numArray[j].toString()){
-                           return true;
-                        }
-                        else {
-                            return false;
-                        }
-                    }
-                }
-        };*/
-
-		
-		Validation.prototype.isValidEmail = function (string){
-            var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-            if (emailPattern.test(string)){
-                return "valid";
-            } else {
-                return "invalid";
-            }
-		};
-		
-		Validation.prototype.isValidNameSurname = function (string){
-            //case: if string bigger than 30 characters
-            if (string.length >= 30 ){
-                return "invalid";
-            //case: string smaller than 30, but has non alpha  characters
-            } else if (isAlphaChar(string)){
-                    return "valid";
-            } else {
-                return "invalid";
-            }
-
-		};
-		
-		Validation.prototype.isValidZipCode = function (string){
-             if (isNumericChar(string)){
-                    return "valid";
-            } else {
-                return "invalid";
-            }
-		
-		};
-		
-		/////////////////////////////////
-		describe("Validation Class to validate e-mails, name&surname and zip code formats", function() {
-			var validation;
-            beforeEach(function (){
-				validation = new Validation();
-			});
-			
-			describe("An e-mail like 'osman.yuksel@tart.com.tr' should be validated", function(){
-                it("should return: valid with osman.yuksel@tart.com.tr", function(){
-                    var result = validation.isValidEmail("osman.yuksel@tart.com.tr");
-                    expect(result).toEqual("valid");
-                });
-
-                it("should return: valid with john_doe@doe.co.uk", function(){
-                    var result = validation.isValidEmail("john_doe@doe.co.uk");
-                    expect(result).toEqual("valid");
-                });
-
-            });
-
-            describe("An e-mail like 'osman.yuksel@tart' should not be validated", function(){
-                it("should return: invalid with osman.yuksel@tart", function(){
-                    var result = validation.isValidEmail("osman.yuksel@tart");
-                    expect(result).toEqual("invalid");
-                });
-
-            });
-
-            describe("An e-mail like 'osman.yüksel@tart.com.tr' should not be validated", function(){
-                it("should return: invalid with osman.yüksel@tart.com.tr", function(){
-                    var result = validation.isValidEmail("osman.yüksel@tart.com.tr");
-                    expect(result).toEqual("invalid");
-                });
-
-
-            });
-
-            describe("A name and surname longer than 30 characters should not be validated", function(){
-                it("should return: invalid with Osman Yüksel Osman Yüksel Osman Yüksel Osman Yüksel", function(){
-                    var result = validation.isValidNameSurname("Osman Yüksel Osman Yüksel Osman Yüksel Osman Yüksel");
-                    expect(result).toEqual("invalid");
-                });
-             });
-
-            describe("A name and surname with alpha numeric characters should be validated", function(){
-                it("should return: valid with Osman Yüksel", function(){
-                    var result = validation.isValidNameSurname("Osman Yüksel");
-                    expect(result).toEqual("valid");
-                });
-
-                 it("should return: valid with Osman Yüksel Yüksel", function(){
-                    var result = validation.isValidNameSurname("Osman Yüksel Yüksel");
-                    expect(result).toEqual("valid");
-                });
-            });
-
-            describe("A name and surname with non letter  characters should not be validated", function(){
-                it("should return: invalid with Osman.Yüksel", function(){
-                    var result = validation.isValidNameSurname("Osman.Yüksel");
-                    expect(result).toEqual("invalid");
-                });
-
-                  it("should return: invalid with empty string", function(){
-                    var result = validation.isValidNameSurname("");
-                    expect(result).toEqual("invalid");
-                });
-            });
-
-
-            describe("A zip code having non numeric characters should not be validated", function(){
-                it("should return: invalid with abcde", function(){
-                    var result = validation.isValidZipCode("abcde");
-                    expect(result).toEqual("invalid");
-                });
-            });
-
-            describe("A zip code with a space character should not be validated", function(){
-                it("should return: invalid with 12 34", function(){
-                    var result = validation.isValidZipCode("12 34");
-                    expect(result).toEqual("invalid");
-                });
-                
-            });
-
-
-
-            describe("A zip code with 5 numeric characters should be validated", function(){
-                it("should return: valid with 12345", function(){
-                    var result = validation.isValidZipCode("12345");
-                    expect(result).toEqual("valid");
-                });
-            });
-
-		
-		});
-
-
-        //run written suites
-        jasmine.getEnv()['addReporter'](new jasmine.TrivialReporter());
-        jasmine.getEnv()['execute']();
-    </script>
-
+<script type="text/javascript">
+   //run written suites
+  jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
+  jasmine.getEnv().execute();
+</script>
 
 </body>
 </html>

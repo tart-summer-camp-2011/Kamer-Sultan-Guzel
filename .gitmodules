@@ -1,0 +1,3 @@
+[submodule "twitter/js/third_party"]
+	path = twitter/js/third_party
+	url = git@github.com:tart/tartJS.git
