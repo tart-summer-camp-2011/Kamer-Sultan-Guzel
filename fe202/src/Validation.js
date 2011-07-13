@@ -15,33 +15,25 @@ var Validation = function() {
 
 };
 
-      Validation.prototype.isValidEmail = function (string){
+      Validation.prototype.isValidEmail = function (inputString){
             var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-            if (emailPattern.test(string)){
-                return "valid";
-            } else {
-                return "invalid";
-            }
+            return emailPattern.test(inputString);
 		};
 
-		Validation.prototype.isValidNameSurname = function (string){
+		Validation.prototype.isValidNameSurname = function (inputString){
             //case: if string bigger than 30 characters
-            if (string.length >= 30 ){
-                return "invalid";
-            //case: string smaller than 30, but has non alpha  characters
-            } else if (util.string.isAlphaChar(string)){
-                    return "valid";
+            if (inputString.length >= 30 || inputString.indexOf(' ') <= 0 || inputString.indexOf(' ') == inputString.length-1){
+                return false;
             } else {
-                return "invalid";
+                return util.string.isAlphaChar(inputString);
             }
-
 		};
 
-		Validation.prototype.isValidZipCode = function (string){
-             if (util.string.isNumericChar(string)){
-                    return "valid";
+		Validation.prototype.isValidZipCode = function (inputString){
+            if(inputString.indexOf(' ') > 0 || inputString.length != 5){
+                return false;
             } else {
-                return "invalid";
+                return util.string.isNumericChar(inputString);
             }
 
 		};
