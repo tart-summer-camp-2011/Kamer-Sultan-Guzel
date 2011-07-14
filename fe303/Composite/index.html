@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FE303</title>
+    <script type="text/javascript" src="../tartJS/third_party/goog/goog/base.js"></script>
+    <script type="text/javascript" src="../tartJS/tart/deps.js"></script>
+
+    <script type="text/javascript">
+        var Person = function(name){
+            this.name = name;
+            this.children = [];
+        };
+
+        /**
+         * Add a chils to a person instance
+         * param {Person} person Child to be added
+         **/
+
+        Person.prototype.addChild = function(person){
+            this.children.push(person);
+        };
+
+        Person.prototype.visitNeighbors = function(){
+            console.log("aleykum selam ben " + this.name);
+            for (var i =0, length = this.children.length; i < length; i++)
+                this.children[i].visitNeighbors();
+        };
+
+
+
+        var armagan = new Person('armagan');
+        var mert = new Person('mert');
+        var murat = new Person('murat');
+        var secil = new Person('secil');
+        var deniz = new Person('deniz');
+
+        armagan.addChild(mert);
+        armagan.addChild(murat);
+        murat.addChild(secil);
+        deniz.addChild(armagan);
+
+        murat.visitNeighbors();
+    </script>
+
+    
+
+</head>
+<body>
+
+</body>
+</html>
