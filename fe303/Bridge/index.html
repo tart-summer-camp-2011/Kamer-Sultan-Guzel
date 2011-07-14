@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FE303</title>
+    <script type="text/javascript" src="../tartJS/third_party/jquery/jquery-1.5.2.js"></script>
+    <script type="text/javascript" src="../tartJS/third_party/goog/goog/base.js"></script>
+    <script type="text/javascript" src="../tartJS/tart/deps.js"></script>
+
+    <script type="text/javascript">
+        $(function(){
+            var $helloArmaganButton = $('<div  id="Armagan">SayHello!</div>');
+            var $helloDamlaButton = $('<div  id="Damla">SayHello!</div>');
+            $('body').append($helloArmaganButton);
+            $('body').append($helloDamlaButton);
+
+            $helloArmaganButton.click(function(e){
+                console.log("Hello" + $(this).attr('id'));
+            });
+            $helloDamlaButton.click(function(e){
+                console.log("Hello" + $(this).attr('id'));
+            });
+        });
+        
+    </script>
+
+    
+
+</head>
+<body>
+
+</body>
+</html>
