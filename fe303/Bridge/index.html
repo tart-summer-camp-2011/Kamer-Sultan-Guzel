@@ -7,7 +7,14 @@
     <script type="text/javascript" src="../tartJS/tart/deps.js"></script>
 
     <script type="text/javascript">
-        var $helloArmaganButton, $helloDamlaButton, sayHello, sayHelloDomBridge;
+        var $helloArmaganButton,
+                $helloDamlaButton,
+                sayHello,
+                sayHelloDomBridge,
+                sayHelloPersonBridge,
+                Person,
+                person;
+        
         $(function(){
             var $helloArmaganButton = $('<div  id="Armagan">SayHello!</div>');
             var $helloDamlaButton = $('<div  id="Damla">SayHello!</div>');
@@ -20,13 +27,33 @@
             };
 
             // bridge to any other idea
+            /*
+            * @this {HTML element}
+            * */
             sayHelloDomBridge = function(){
                 sayHello($(this).attr('id'));
+            };
+
+            /**
+             * @param {Person} person Person instance to get its name
+             * **/
+            sayHelloPersonBridge = function(person){
+                sayHello(person.name);
             };
 
             //using bridges
             $helloArmaganButton.click(sayHelloDomBridge);
             $helloDamlaButton.mouseover(sayHelloDomBridge);
+
+            //'introduce a Person class
+            Person = function (name, eyes, height){
+                this.name = name;
+                this.name = eyes;
+                this.height = height;
+            };
+
+            person = new Person("Mahmut", "brown", "170cm");
+            sayHelloPersonBridge(person);
         });
         
     </script>
