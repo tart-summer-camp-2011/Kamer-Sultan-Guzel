@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FE303</title>
+    <script type="text/javascript" src="../tartJS/third_party/goog/goog/base.js"></script>
+    <script type="text/javascript" src="../tartJS/tart/deps.js"></script>
+
+    <script type="text/javascript">
+        var MacBookAir = function() {};
+        var MacBookPro = function() {};
+        var MacBook = function() {};
+        var MacBookTouch = function() {};
+
+        var MacBookFactory = function(){};
+
+        MacBookFactory.prototype.createMacBook = function(type){
+            switch (type){
+                case "air":
+                    return new MacBookAir();
+                case "pro":
+                    return new MacBookPro();
+                case "touch":
+                    return new MacBookTouch();
+                case "default":
+                    return new MacBook();
+            }
+        };
+
+        var Apple = new MacBookFactory();
+        var air = Apple.createMacBook("air");
+    </script>
+
+    
+
+</head>
+<body>
+
+</body>
+</html>
