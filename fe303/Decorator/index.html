@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FE303</title>
+    <script type="text/javascript" src="../tartJS/third_party/goog/goog/base.js"></script>
+    <script type="text/javascript" src="../tartJS/tart/deps.js"></script>
+
+    <script type="text/javascript">
+        /**
+         * @interface
+         * **/
+        var MacProInterface = function (){};
+        MacProInterface.prototype.getSoftwareList = goog.abstractMethod;
+        MacProInterface.prototype.boot = goog.abstractMethod;
+
+        var MacPro = function(){
+            this.software = "Mac OS X";
+        };
+
+        MacPro.prototype.getSoftwareList = function(){
+            return this.software;
+        };
+
+        MacPro.prototype.boot = function(){
+            console.log("booted with the following software: " + this.getSoftwareList());
+        };
+        
+        /**
+         * @implements {MacProInterface}
+         * @param {MacProInterface} macPro The MacPro instance this class will decorate
+        **/
+        var MacProDecorator = function(MacPro){
+            this.macPro = macPro;
+        };
+
+        MacProDecorator.prototype.getSoftwareList = function(){
+            return this.macPro.getSoftwareList();
+        };
+
+        MacProDecorator.prototype.boot = function(){
+            return this.macPro.booot();
+        };
+
+
+    </script>
+
+    
+
+</head>
+<body>
+
+</body>
+</html>
