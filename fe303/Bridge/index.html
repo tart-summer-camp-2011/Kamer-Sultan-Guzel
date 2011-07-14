@@ -7,19 +7,26 @@
     <script type="text/javascript" src="../tartJS/tart/deps.js"></script>
 
     <script type="text/javascript">
-
+        var $helloArmaganButton, $helloDamlaButton, sayHello, sayHelloDomBridge;
         $(function(){
             var $helloArmaganButton = $('<div  id="Armagan">SayHello!</div>');
             var $helloDamlaButton = $('<div  id="Damla">SayHello!</div>');
             $('body').append($helloArmaganButton);
             $('body').append($helloDamlaButton);
 
-            var sayHello = function(){
-                console.log("Hello" + $(this).attr('id'));
+            //core application functionality
+            sayHello = function(name){
+                console.log("Hello" + name);
             };
 
-            $helloArmaganButton.click(sayHello);
-            $helloDamlaButton.mouseover(sayHello);
+            // bridge to any other idea
+            sayHelloDomBridge = function(){
+                sayHello($(this).attr('id'));
+            };
+
+            //using bridges
+            $helloArmaganButton.click(sayHelloDomBridge);
+            $helloDamlaButton.mouseover(sayHelloDomBridge);
         });
         
     </script>
