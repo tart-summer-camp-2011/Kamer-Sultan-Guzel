@@ -31,7 +31,11 @@
 
         Teller.prototype.processRequest = function (){
             var client = clientIterator.next();
+            if (client = "undefined"){
+                console.log("No customers in line");
+            } else{
             console.log(client + "'s request is processed.");
+            }
             //client.getRequest();
         };
 
@@ -62,7 +66,7 @@
         var mucavit = new Client();
         var muco = new Client();
         //add clients to a queue
-        console.log("Clients:")
+        console.log("Clients:");
         bank.addClient("mucavit");
         bank.addClient("mahmut");
         bank.addClient("muco");
