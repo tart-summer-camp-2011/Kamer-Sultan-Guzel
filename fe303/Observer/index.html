@@ -8,6 +8,7 @@
     <script type="text/javascript">
         var Publisher = function(){
             this.subscribers = [];
+            this.increase = 0.1;
 
         };
 
@@ -17,42 +18,40 @@
 
         };
 
-        Publisher.prototype.notifySubscriber = function(){
-           
+        Publisher.prototype.notifySubscribers = function(){
+            console.log("**New Prices**");
+           // for (var i =0, length = this.subscribers.length; i < length; i++){
+                //console.log(this.subscribers[i].price);
+           // }
+                appleStoreTR.updatePrice(this.increase);
+                appleStoreUS.updatePrice(this.increase);
+                appleStoreCA.updatePrice(this.increase);
+            //}
+            };
+
+        var AppleStore = function( price, currency){
+            this.price = price;
+            this.currency = currency;
         };
 
-        //Observer class
-        var AppStoreInterface = function (){};
-        //AppStoreInterface.prototype.updatePrice = goog.abstractMethod();
-
-        var AppleStoreTR = function(){
-            this.currency = "Lira";
+        AppleStore.prototype.updatePrice = function(increase){
+            this.price = this.price*(1+increase);
+            console.log("The price is now " + this.price + " " + this.currency);
         };
 
-        var AppleStoreUS = function(){
-            this.currency = "$";
-        };
-        
-        var AppleStoreCA = function(){
-            this.currency = "CAD";
-        };
-
-
-
-
-        
-
-
-
-        var appleStoreTR = new AppleStoreTR();
-        var appleStoreUS = new AppleStoreUS();
-        var appleStoreCA = new AppleStoreCA();
+        var appleStoreTR = new AppleStore("2000", "TL");
+        var appleStoreUS = new AppleStore("950", "$");
+        var appleStoreCA = new AppleStore("1050", "CAD");
 
         var appleCo = new Publisher();
 
         appleCo.addSubscriber("appleStoreTR");
         appleCo.addSubscriber("appleStoreUS");
         appleCo.addSubscriber("appleStoreCA");
+
+        appleCo.notifySubscribers();
+
+
 
         
     </script>
