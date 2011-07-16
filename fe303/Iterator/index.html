@@ -7,8 +7,8 @@
 
     <script type="text/javascript">
         
-        var Client = function(){
-
+        var Client = function(name){
+            this.name = name;
         };
 
         Client.prototype.getRequest = function(){
@@ -21,7 +21,7 @@
 
         Bank.prototype.addClient = function(client){
             this.clients.push(client);
-            console.log(client + " is now waiting in the line");
+            console.log(client.name + " is now waiting in the line");
         };
 
         var Teller = function(clientIterator){
@@ -31,12 +31,13 @@
 
         Teller.prototype.processRequest = function (){
             var client = clientIterator.next();
-            if (client = "undefined"){
+            console.log(client);
+            if (client == "undefined"){
                 console.log("No customers in line");
             } else{
-            console.log(client + "'s request is processed.");
+            console.log(client.name + "'s request is processed.");
             }
-            //client.getRequest();
+            client.getRequest();
         };
 
         var ClientIterator = function(){
@@ -62,14 +63,14 @@
         var bank = new Bank();
         var clientIterator = new ClientIterator();
         //creating clients
-        var mahmut = new Client();
-        var mucavit = new Client();
-        var muco = new Client();
+        var mahmut = new Client("mahmut");
+        var mucavit = new Client("mucavit");
+        var muco = new Client("muco");
         //add clients to a queue
         console.log("Clients:");
-        bank.addClient("mucavit");
-        bank.addClient("mahmut");
-        bank.addClient("muco");
+        bank.addClient(mucavit);
+        bank.addClient(mahmut);
+        bank.addClient(muco);
         //pass clients to iterator
         clientIterator.createIterator();
 
