@@ -14,22 +14,20 @@
 
         Publisher.prototype.addSubscriber = function(subscriber){
             this.subscribers.push(subscriber);
-            console.log(subscriber + " has been successfully subscribed!");
+            console.log(subscriber.name + " has been successfully subscribed!");
 
         };
 
         Publisher.prototype.notifySubscribers = function(){
             console.log("**New Prices**");
-           // for (var i =0, length = this.subscribers.length; i < length; i++){
-                //console.log(this.subscribers[i].price);
-           // }
-                appleStoreTR.updatePrice(this.increase);
-                appleStoreUS.updatePrice(this.increase);
-                appleStoreCA.updatePrice(this.increase);
-            //}
-            };
+            for (var i =0, length = this.subscribers.length; i < length; i++){
+                console.log(this.subscribers[i].updatePrice(this.increase));
+            }
 
-        var AppleStore = function( price, currency){
+        };
+
+        var AppleStore = function( name, price, currency){
+            this.name = name;
             this.price = price;
             this.currency = currency;
         };
@@ -39,15 +37,15 @@
             console.log("The price is now " + this.price + " " + this.currency);
         };
 
-        var appleStoreTR = new AppleStore("2000", "TL");
-        var appleStoreUS = new AppleStore("950", "$");
-        var appleStoreCA = new AppleStore("1050", "CAD");
+        var appleStoreTR = new AppleStore("TR Store","2000", "TL");
+        var appleStoreUS = new AppleStore("US Store","950", "$");
+        var appleStoreCA = new AppleStore("CA Store","1050", "CAD");
 
         var appleCo = new Publisher();
 
-        appleCo.addSubscriber("appleStoreTR");
-        appleCo.addSubscriber("appleStoreUS");
-        appleCo.addSubscriber("appleStoreCA");
+        appleCo.addSubscriber(appleStoreTR);
+        appleCo.addSubscriber(appleStoreUS);
+        appleCo.addSubscriber(appleStoreCA);
 
         appleCo.notifySubscribers();
 
