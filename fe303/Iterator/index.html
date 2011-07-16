@@ -51,6 +51,23 @@
             this.items = bank.clients;
         };
 
+        /* Testing the implementation */
+        //instantiation of classes
+        var teller = new Teller();
+        var bank = new Bank();
+        var queue = new ClientIterator();
+        //creating clients
+        var mahmut = new Client();
+        var mucavit = new Client();
+        var muco = new Client();
+        //add clients to a queue
+        bank.addClient("mucavit");
+        bank.addClient("mahmut");
+        bank.addClient("muco");
+        //pass clients to iterator
+        queue.createIterator();
+        
+        
 
 
 
