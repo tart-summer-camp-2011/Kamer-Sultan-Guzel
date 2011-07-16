@@ -18,18 +18,35 @@
         };
 
         Publisher.prototype.notifySubscriber = function(){
-            
+           
         };
 
-        var Subscriber = function(){
-            
+        //Observer class
+        var AppStoreInterface = function (){};
+        //AppStoreInterface.prototype.updatePrice = goog.abstractMethod();
+
+        var AppleStoreTR = function(){
+            this.currency = "Lira";
+        };
+
+        var AppleStoreUS = function(){
+            this.currency = "$";
+        };
+        
+        var AppleStoreCA = function(){
+            this.currency = "CAD";
         };
 
 
 
-        var appleStoreTR = new Subscriber();
-        var appleStoreUS = new Subscriber();
-        var appleStoreCA = new Subscriber();
+
+        
+
+
+
+        var appleStoreTR = new AppleStoreTR();
+        var appleStoreUS = new AppleStoreUS();
+        var appleStoreCA = new AppleStoreCA();
 
         var appleCo = new Publisher();
 
