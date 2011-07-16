@@ -12,7 +12,7 @@
         };
 
         Client.prototype.getRequest = function(){
-            return "a new request is gotten";
+            console.log("Calling next customer in line..");
         };
 
         var Bank = function(){
@@ -30,8 +30,9 @@
         };
 
         Teller.prototype.processRequest = function (){
-            var client = this.clientIterator.next();
-            client.getRequest();
+            var client = clientIterator.next();
+            console.log(client + "'s request is processed.");
+            //client.getRequest();
         };
 
         var ClientIterator = function(){
@@ -43,7 +44,7 @@
             if (this.items.length >= this.nextInLineIndex){
                 return this.items[this.nextInLineIndex++];
             } else {
-                console.log("no more clients waiting");
+                console.log("No more clients waiting");
             }
         };
 
@@ -55,17 +56,24 @@
         //instantiation of classes
         var teller = new Teller();
         var bank = new Bank();
-        var queue = new ClientIterator();
+        var clientIterator = new ClientIterator();
         //creating clients
         var mahmut = new Client();
         var mucavit = new Client();
         var muco = new Client();
         //add clients to a queue
+        console.log("Clients:")
         bank.addClient("mucavit");
         bank.addClient("mahmut");
         bank.addClient("muco");
         //pass clients to iterator
-        queue.createIterator();
+        clientIterator.createIterator();
+
+        for (var i =0, length = bank.clients.length; i < length; i++)
+            teller.processRequest();
+
+        
+
         
         
 
