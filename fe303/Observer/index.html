@@ -7,11 +7,14 @@
 
     <script type="text/javascript">
         var Publisher = function(){
+            this.subscribers = [];
 
         };
 
-        Publisher.prototype.addSubscriber = function(){
-            
+        Publisher.prototype.addSubscriber = function(subscriber){
+            this.subscribers.push(subscriber);
+            console.log(subscriber + " has been successfully subscribed!");
+
         };
 
         Publisher.prototype.notifySubscriber = function(){
@@ -21,6 +24,18 @@
         var Subscriber = function(){
             
         };
+
+
+
+        var appleStoreTR = new Subscriber();
+        var appleStoreUS = new Subscriber();
+        var appleStoreCA = new Subscriber();
+
+        var appleCo = new Publisher();
+
+        appleCo.addSubscriber("appleStoreTR");
+        appleCo.addSubscriber("appleStoreUS");
+        appleCo.addSubscriber("appleStoreCA");
 
         
     </script>
