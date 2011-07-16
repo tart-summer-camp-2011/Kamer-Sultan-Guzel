@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FE303</title>
+    <script type="text/javascript" src="../tartJS/third_party/goog/goog/base.js"></script>
+    <script type="text/javascript" src="../tartJS/tart/deps.js"></script>
+
+    <script type="text/javascript">
+        
+        var Client = function(){
+
+        };
+
+        Client.prototype.getRequest = function(){
+            return "a new request is gotten";
+        };
+
+        var Bank = function(){
+            this.clients = [];
+        };
+
+        Bank.prototype.addClient = function(client){
+            this.clients.push(client);
+            console.log(client + " is now waiting in the line");
+        };
+
+        var Teller = function(clientIterator){
+            this.clientIterator = clientIterator;
+
+        };
+
+        Teller.prototype.processRequest = function (){
+            var client = this.clientIterator.next();
+            client.getRequest();
+        };
+
+        var ClientIterator = function(){
+            this.items = [];
+            this.nextInLineIndex = 0;
+        };
+
+        ClientIterator.prototype.next = function(){
+            if (this.items.length >= this.nextInLineIndex){
+                return this.items[this.nextInLineIndex++];
+            } else {
+                console.log("no more clients waiting");
+            }
+        };
+
+        ClientIterator.prototype.createIterator = function(){
+            this.items = bank.clients;
+        };
+
+
+
+
+    </script>
+    
+
+</head>
+<body>
+
+</body>
+</html>
