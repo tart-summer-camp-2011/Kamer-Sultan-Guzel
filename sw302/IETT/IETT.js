@@ -37,7 +37,11 @@ var MyEvent = function(title){
 
 
 var Traveller = function(title){
-    
+    var that = MyEvent(title);
+    that.grumble = function(){
+        console.log("Nerde bu otobus kardesim!");
+    };
+    return that;
 };
 
 var Bus = function(){
@@ -48,3 +52,6 @@ var BusStop = function(){
 
 };
 
+var iett = new IETT();
+var traveller = new Traveller("traveller");
+traveller.grumble();
