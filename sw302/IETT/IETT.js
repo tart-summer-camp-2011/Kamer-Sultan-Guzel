@@ -15,20 +15,36 @@ IETT.prototype.addEventListener = function(subscriber){
     console.log(subscriber.name + " is now in the IETT system!");
 };
 
-IETT.prototype.fireEvent = function(){
+IETT.prototype.fireEvent = function(event){
+
 
 };
 
-var Yolcu = function(){
+/*All events will inherit myEvent class*/
+var MyEvent = function(title){
+    var that = {};
+
+    that.title = title;
+    that.source;
+    that.id;
+
+    that.setSource = function(src){
+        that.source = src;
+    };
+
+    return that;
+};
+
+
+var Traveller = function(title){
+    
+};
+
+var Bus = function(){
 
 };
 
-var Otobus = function(){
+var BusStop = function(){
 
 };
-
-var Durak = function(){
-
-};
-
 
